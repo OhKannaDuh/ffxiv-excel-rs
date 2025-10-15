@@ -1,0 +1,32 @@
+/// This file is auto-generated. Do not edit manually.
+
+use crate::prelude::*;
+
+#[derive(Debug, Clone)]
+pub struct HousingMerchantPose {
+    pub row_id: u32,
+    pub action_timeline_id: u32,
+    pub action_timeline: RowRef<ActionTimeline>,
+    pub pose: String,
+}
+
+impl Sheet for HousingMerchantPose {
+    const SHEET_NAME: &'static str = "HousingMerchantPose";
+}
+
+impl FromExcelRow for HousingMerchantPose {
+    fn from_row(row: &ExcelRow) -> Option<Self> {
+        let single_row = match &row.kind {
+            ExcelRowKind::SingleRow(s) => s,
+            _ => return None,
+        };
+
+        Some(Self {
+            row_id: row.row_id,
+            action_timeline_id: single_row.columns.get(0).to_u32(),
+            action_timeline: RowRef::<ActionTimeline>::from(single_row.columns.get(0).to_u32()),
+            pose: single_row.columns.get(1).to_owned_string(),
+        })
+    }
+}
+

@@ -1,0 +1,11 @@
+
+[package]
+name = "ffxiv-excel-types"
+version = "0.1.0"
+edition = "2024"
+description = "Typed FFXIV Excel sheet structs and parsers"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/ohkannaduh/ffxiv-excel-types-rs"
+
+[dependencies]
+physis.workspace = true

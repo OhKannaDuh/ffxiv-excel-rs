@@ -1,0 +1,6 @@
+[workspace]
+resolver = "2"
+members = ["crates/excel-types", "crates/excel-codegen"]
+
+[workspace.dependencies]
+physis = "0.4.0"

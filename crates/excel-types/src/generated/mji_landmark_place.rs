@@ -1,0 +1,34 @@
+/// This file is auto-generated. Do not edit manually.
+
+use crate::prelude::*;
+
+#[derive(Debug, Clone)]
+pub struct MJILandmarkPlace {
+    pub row_id: u32,
+    pub name_id: u32,
+    pub name: RowRef<EObjName>,
+    pub sgb_id: u32,
+    pub sgb: RowRef<ExportedSG>,
+}
+
+impl Sheet for MJILandmarkPlace {
+    const SHEET_NAME: &'static str = "MJILandmarkPlace";
+}
+
+impl FromExcelRow for MJILandmarkPlace {
+    fn from_row(row: &ExcelRow) -> Option<Self> {
+        let single_row = match &row.kind {
+            ExcelRowKind::SingleRow(s) => s,
+            _ => return None,
+        };
+
+        Some(Self {
+            row_id: row.row_id,
+            name_id: single_row.columns.get(1).to_u32(),
+            name: RowRef::<EObjName>::from(single_row.columns.get(1).to_u32()),
+            sgb_id: single_row.columns.get(3).to_u32(),
+            sgb: RowRef::<ExportedSG>::from(single_row.columns.get(3).to_u32()),
+        })
+    }
+}
+
