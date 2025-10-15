@@ -1,5 +1,5 @@
 pub mod core;
-pub use core::{FromExcelRow, MultiRef2, RowRef, Sheet};
+pub use core::{FromExcelRow, RowRef, Sheet};
 
 mod generated {
     include!("generated/mod.rs");

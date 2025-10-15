@@ -31,13 +31,6 @@ impl<T: FromExcelRow> RowRef<T> {
     }
 }
 
-#[derive(Debug, Clone, Copy)]
-pub enum MultiRef2<A: FromExcelRow, B: FromExcelRow> {
-    A(RowRef<A>),
-    B(RowRef<B>),
-    Unknown(u32),
-}
-
 pub struct DataManager {
     game_data: physis::gamedata::GameData,
     lang: physis::common::Language,
@@ -82,8 +75,17 @@ impl DataManager {
     pub fn get_ref<T: Sheet>(&mut self, id: u32) -> Option<&T> {
         self.ensure_loaded::<T>()?.get(id)
     }
+
     pub fn get_all_ref<T: Sheet>(&mut self) -> Option<impl Iterator<Item = &T>> {
         Some(self.ensure_loaded::<T>()?.values())
+    }
+
+    pub fn resolve_ref<T: Sheet>(&mut self, r: RowRef<T>) -> Option<&T> {
+        if r.is_null() {
+            None
+        } else {
+            self.get_ref::<T>(r.id)
+        }
     }
 }
 
